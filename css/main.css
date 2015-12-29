@@ -1,0 +1,33 @@
+table, th, td{
+   border: 1px solid black;
+   margin: auto;
+   display: inline-block;
+}
+
+th, td {
+  width: 100px;
+  height: 100px;
+    text-align: center;
+    background-color: green;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+#display {
+  text-align: right;
+  background-color: white;
+  color: black;
+  padding-right: 5px;
+}
+
+#darkorange {
+  background-color: darkorange;
+}
+
+#darkgray {
+  background-color: darkgray;
+}
+
+#dimgray {
+  background-color: dimgray;
+}
