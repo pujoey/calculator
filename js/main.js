@@ -1,14 +1,23 @@
 // STATE OF THE CALCULATOR
-var startNumber="";  //gb var to store the first number
+var startNumber="0";  //gb var to store the first number
 var lastNumber="";  //gb var to store the last number
 var result=0;  //gb var to store the result of calculation
 var userInput="";
 var isOperator=false;
 var calsign = "";
 
+//initial rendering
+render();
 
-$('table').on("click", "td", function(evt) {
-  // userInput += $(this).text();
+$('.clear').on("click", function() {
+  clear();
+})
+
+$('.keys').on("click", "span", function(evt) {
+
+  if (startNumber == "0") {
+    startNumber = "";
+  }
    userInput = $(this).text();
 
   switch(userInput) {
@@ -29,7 +38,6 @@ $('table').on("click", "td", function(evt) {
     case "x": sign("x"); break;
     case "÷": sign("÷"); break;
     case "=": calculate(); break;
-    case "AC": clear(); break;
   }
 
   render();
@@ -38,7 +46,7 @@ $('table').on("click", "td", function(evt) {
 function sign(sign) {
   isOperator = true;
   userInput = "";
-  // $("#display").text("0");
+  $("#display").text("");
   calsign=sign;
 }
 
@@ -49,15 +57,18 @@ function calculate() {
    case "x": result = Number(startNumber) * Number(lastNumber); break;
    case "÷": result = Number(startNumber) / Number(lastNumber); break;
   }
-  result = parseFloat(result).toFixed(2);
+  //check if result has decimals, yes then parse to 2 decimal place
+  if (result % 1 !==0 ) {
+    result = parseFloat(result).toFixed(2);
+  }
 }
 
 function render() {
   //display gb var numberPressed
   //display gb var result if "=" pressed
-  if (result) { $("#display").text(result); }
-  else if (calsign !== "" && lastNumber=="") { $("#display").text("0"); }
-  else { (lastNumber=="") ?   $("#display").text(startNumber):$("#display").text(lastNumber); }
+  if (result) { $(".screen").text(result); }
+  else if (calsign !== "" && lastNumber=="") { $(".screen").text(""); }
+  else { (lastNumber=="") ?   $(".screen").text(startNumber):$(".screen").text(lastNumber); }
 }
 
 function clear() {
@@ -67,5 +78,5 @@ startNumber="";  //gb  to store the first number
  userInput="";
  isOperator=false;
 calsign = "";
-$("#display").text("0");
+$(".screen").text("0");
 }
